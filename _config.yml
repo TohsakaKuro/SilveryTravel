@@ -13,7 +13,7 @@ timezone: gmt
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: https://tohsakakuro.github.io/SilveryTravel/ 
-root: /SilveryTravel
+root: /SilveryTravel/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 
