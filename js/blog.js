@@ -17,24 +17,15 @@
 	
 	// ------- 处理搜索侧边栏结束 --------
 
-	var slideList = []
-	var prefix = window.slideConfig.prefix
-	var ext = '.' + window.slideConfig.ext
-	var maxCount = window.slideConfig.maxCount
-	for(var k = 0; k < 6; k++) {
-		var n = Math.floor(Math.random() * maxCount) + 1
-		while(slideList.indexOf(n) !== -1) {
-			n = Math.floor(Math.random() * maxCount) + 1
-		}
-		slideList.push(n)
-	}
+
+
 
 	// ------- 处理背景图 --------------
 
+	var bgurl = window.slideConfig.bgurl
 	var cdSlideShow = $('.cb-slideshow')
-	cdSlideShow.find('span').each(function (i, span) {
-		$(this).css('backgroundImage', 'url(\'' + prefix + slideList[i] + ext + '\')')
-	})
+	cdSlideShow.find('span').css('backgroundImage', 'url(\'' + bgurl + '\')')
+	
 
 	// ------- 处理背景图结束 -----------
 
