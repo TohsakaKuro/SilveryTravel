@@ -33,6 +33,14 @@
         }
     </style>
     
+    <script src="//cdn1.lncld.net/static/js/3.4.2/av-min.js"></script>
+    <script>
+      AV.init({
+        appId: 'gIreXO773tTOg79MwQYGpQAO-gzGzoHsz',
+        appKey: 'N9JMRUGNuyD7GGxuwwU2dydm'
+      })
+    </script>
+    
     <!--<script type="text/javascript">
       if (document.images) {
         var avatar = new Image();
@@ -47,37 +55,11 @@
     </script>-->
 </head>
 <body>
-    <!-- 背景轮播图功能 -->
     <section class="hidden-xs">
     <ul class="cb-slideshow">
-        <li><span>我</span></li>
-        <li><span>想</span></li>
-        <li><span>成为</span></li>
-        <li><span>你</span></li>
-        <li><span>的</span></li>
-        <li><span>恋人</span></li>
+        <li><span>我想成为你的恋人</span></li>
     </ul>
 </section>
-    <!-- 欧尼酱功能, 谁用谁知道 -->
-    
-    <div class="gal-menu gal-dropdown">
-    <div class="circle" id="gal">
-        <div class="ring">
-            <a href="https://tohsakakuro.github.io" class="menuItem" style="left: 50%; top: 15%;">首页</a>
-            
-            <a class="menuItem" style="left: 80.3109%; top: 32.5%;">下一页</a>
-            
-            <a href="/archives" class="menuItem" style="left: 80.3109%; top: 67.5%;">归档</a>
-            <a href="/about" class="menuItem" style="left: 50%; top: 85%;">关于</a>
-            <a href="/message" class="menuItem" style="left: 19.6891%; top: 67.5%;">留言板</a>
-            
-            <a class="menuItem" style="left: 19.6891%; top: 32.5%;">上一页</a>
-            
-        </div>
-        <audio id="audio" src="/imgs/oni.mp3"></audio>
-    </div>
-</div>
-    
     <header class="navbar navbar-inverse" id="gal-header">
     <div class="container">
         <div class="navbar-header">
@@ -179,6 +161,10 @@
                 <i class="fa fa-calendar"></i> 2018-01-26
             </span>
             
+            <span class="label label-gal">
+                <i class="fa fa-eye"></i>
+            </span>
+            
         </div>
     </div>
     <!-- 小型设备详细文章 -->
@@ -195,6 +181,8 @@
             <p>
                 
                 
+                <i class="fa fa-eye"></i>
+                
             </p>
         </center>
     </div>
@@ -204,6 +192,15 @@
     </div>
 </article>
 
+
+<div id="comments-template"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script>
+	if(!window.commentConfig) {
+      window.commentConfig = {}
+      window.commentConfig.title = 'Hello World'
+    }
+</script>
 
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
@@ -248,6 +245,18 @@
 </aside>
     
     <!-- 要配置好leancloud才能开启此小工具 -->
+    
+    <aside id="sidebar-hot_posts">
+    <div class="panel panel-gal hot hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+        <div class="panel-heading">
+            <i class="fa fa-fire"></i>
+            最热文章
+            <i class="fa fa-times-circle panel-remove"></i>
+            <i class="fa fa-chevron-circle-up panel-toggle"></i>
+        </div>
+        <ul class="list-group list-group-flush"></ul>
+    </div>
+</aside>
     
     
     <aside id="sidebar-recent_posts">
@@ -358,6 +367,35 @@
 <div id="gal-gotop">
     <i class="fa fa-angle-up"></i>
 </div>
+	
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/nipsilon.model.json", 0.5);});
+})();
+</script>
+
 </body>
 <script src="/js/activate-power-mode.js"></script>
 <script>
@@ -401,16 +439,37 @@
 </script>
 <script>
     window.slideConfig = {
-      prefix: '/imgs/slide/background',
-      ext: 'jpg',
-      maxCount: '6'
+      bgurl: '/imgs/slide/background.png'
     }
 </script>
 <script src="/js/hs.js"></script>
 <script src="/js/blog.js"></script>
 
-<script src="/js/oni.js"></script>
+<script>
+    window.hot_posts_count = '10'
+    // window.use_leancloud = 'true'
+</script>
+<script src="/js/comment/leancloud.js"></script>
 
 
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    if(window.commentConfig) {
+      window.commentConfig.owner = 'null'
+      window.commentConfig.repo = 'null'
+      window.commentConfig.client_id = 'null'
+      window.commentConfig.client_secret = 'null'
+      window.commentConfig.redirect_uri = 'null'
+    } else {
+      window.commentConfig = {
+        owner: 'null',
+        repo: 'null',
+        client_id: 'null',
+        client_secret: 'null',
+        redirect_uri: 'null'
+      }
+    }
+</script>
+<script src="/js/comment/gitment.js"></script>
 
 </html>
