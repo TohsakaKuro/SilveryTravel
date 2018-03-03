@@ -70,16 +70,6 @@
             </button>
             <a href="https://tohsakakuro.github.io">
                 
-                <style>
-                    #gal-header .navbar-brand {
-                        height: 54px;
-                        line-height: 24px;
-                        font-size: 28px;
-                        opacity: 1;
-                        background-color: rgba(0,0,0,0);
-                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
-                    }
-                </style>
                 <!-- 这里使用文字(navbar_text or config.title) -->
                 <div class="navbar-brand">空白</div>
                 
@@ -106,20 +96,44 @@
                 
                 
                 
-                <li class="">
-                    <a href="/categories">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-list"></i>分类
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/测试标签1/">测试标签1</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
                 
                 
                 
-                <li class="">
-                    <a href="/tags">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-tags"></i>标签
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/sas/">sas</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
@@ -173,6 +187,10 @@
         <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
             
              
+             
+                        <a href="/2018/03/03/my/">my</a>
+                        <br>
+            
              
                         <a href="/2018/01/26/hello-world/">Hello World</a>
                         <br>
@@ -237,6 +255,12 @@
             
             <li class="list-group-item">
                 <span class="post-title">
+                    <a href="/2018/03/03/my/">my</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
                     <a href="/2018/01/26/hello-world/">Hello World</a>
                 </span>
             </li>
@@ -256,10 +280,20 @@
                     </li>
                 
                 
+                    <li class="">
+                        <a href="/archives/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    </li>
+                
+                
+                    <li class="">
+                        <a href="/archives/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    </li>
                 
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/sas/" style="font-size: 16.066060442030448px;" class="tag-cloud-link">sas</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

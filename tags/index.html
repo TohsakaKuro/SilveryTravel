@@ -12,7 +12,7 @@
     
     
     
-    <title>tags | 空白</title>
+    <title>标签 | 空白</title>
     <link href=”https://tohsakakuro.github.io“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -70,16 +70,6 @@
             </button>
             <a href="https://tohsakakuro.github.io">
                 
-                <style>
-                    #gal-header .navbar-brand {
-                        height: 54px;
-                        line-height: 24px;
-                        font-size: 28px;
-                        opacity: 1;
-                        background-color: rgba(0,0,0,0);
-                        text-shadow: 0 0 5px #fff,0 0 10px #fff,0 0 15px #fff,0 0 20px #228DFF,0 0 35px #228DFF,0 0 40px #228DFF,0 0 50px #228DFF,0 0 75px #228DFF;
-                    }
-                </style>
                 <!-- 这里使用文字(navbar_text or config.title) -->
                 <div class="navbar-brand">空白</div>
                 
@@ -106,20 +96,44 @@
                 
                 
                 
-                <li class="">
-                    <a href="/categories">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-list"></i>分类
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/categories/测试标签1/">测试标签1</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
                 
                 
                 
-                <li class="current">
-                    <a href="/tags">
+                <li class="dropdown">
+                    <!-- TODO 添加hover dropdown效果 -->
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
                         <i class="fa fa-tags"></i>标签
                     </a>
+                    <ul class="dropdown-menu">
+                        
+                        
+                        <li>
+                            <a href="/tags/sas/">sas</a>
+                        </li>
+                        
+                        
+                        
+                    </ul>
                 </li>
                 
                 
@@ -148,7 +162,7 @@
     <div class="hidden-xs">
         <div class="title-article">
             <h1>
-                <a href="/tags/index.html">tags</a>
+                <a href="/tags/index.html">标签</a>
             </h1>
         </div>
         <div class="tag-article">
@@ -162,7 +176,7 @@
         <center>
             <div class="title-article">
                 <h4>
-                    <a href="/tags/index.html">tags</a>
+                    <a href="/tags/index.html">标签</a>
                 </h4>
             </div>
             <p>
@@ -171,7 +185,8 @@
         </center>
     </div>
     <div class="content-article">
-        
+        <p>这里是标签页<br>你要怎样啊</p>
+
     </div>
 </article>
 
@@ -233,6 +248,12 @@
             
             <li class="list-group-item">
                 <span class="post-title">
+                    <a href="/2018/03/03/my/">my</a>
+                </span>
+            </li>
+            
+            <li class="list-group-item">
+                <span class="post-title">
                     <a href="/2018/01/26/hello-world/">Hello World</a>
                 </span>
             </li>
@@ -252,10 +273,20 @@
                     </li>
                 
                 
+                    <li class="">
+                        <a href="/tags/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                    </li>
+                
+                
+                    <li class="">
+                        <a href="/tags/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                    </li>
                 
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
+    
+    <a href="/tags/sas/" style="font-size: 14.113257280657429px;" class="tag-cloud-link">sas</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
