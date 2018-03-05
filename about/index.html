@@ -161,6 +161,19 @@
     <div id="gal-body">
         <div class="container">
             <div class="row">
+                <div class="col-md-4 visible-sm visible-xs" id = "sidebar">
+                    <aside id="sidebar-search">
+                        <div class="search" data-aos="fade-up" data-aos-duration="2000">
+                            <form class="form-inline clearfix" id="search-form" method="get"
+                                    action="/search/index.html">
+                                <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
+                                <button class="btn btn-danger btn-gal" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </aside>
+                </div>
                 <div class="col-md-8 gal-right" id="mainstay">
                     <!-- 搜索页面(尽可能接近ZanBlog搜索功能) -->
 
@@ -203,7 +216,7 @@
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
 <aside id="sidebar-search">
-    <div class="search hidden-xs" data-aos="fade-up" data-aos-duration="2000">
+    <div class="search  hidden-sm hidden-xs" data-aos="fade-up" data-aos-duration="2000">
         <form class="form-inline clearfix" id="search-form" method="get"
               action="/search/index.html">
             <input type="text" name="s" class="form-control" id="searchInput" placeholder="搜索文章~">
@@ -214,11 +227,9 @@
     </div>
 </aside>
     <aside id="sidebar-author">
-    <div class="panel panel-gal" data-aos="flip-right" data-aos-duration="3000">
+    <div class="panel panel-gal hidden-xs hidden-sm" data-aos="flip-right" data-aos-duration="3000">
         <div class="panel-heading" style="text-align: center">
-            <i class="fa fa-quote-left"></i>
             银
-            <i class="fa fa-quote-right"></i>
         </div>
         <div class="author-panel text-center">
             <img src="/imgs/Gabriel.png" width="140" height="140"
@@ -293,11 +304,11 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/测试标签1/" style="font-size: 18.002877774656124px;" class="tag-cloud-link">测试标签1</a>
+    <a href="/tags/测试标签1/" style="font-size: 16.85822901624436px;" class="tag-cloud-link">测试标签1</a>
     
-    <a href="/tags/测试标签2/" style="font-size: 18.637440001188796px;" class="tag-cloud-link">测试标签2</a>
+    <a href="/tags/测试标签2/" style="font-size: 15.640630200644395px;" class="tag-cloud-link">测试标签2</a>
     
-    <a href="/tags/测试标签3/" style="font-size: 12.598789118777084px;" class="tag-cloud-link">测试标签3</a>
+    <a href="/tags/测试标签3/" style="font-size: 19.09771352019081px;" class="tag-cloud-link">测试标签3</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
@@ -413,8 +424,8 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 
 </script>
 <script>
-	POWERMODE.colorful = 'true';    // make power mode colorful
-	POWERMODE.shake = 'true';       // turn off shake
+	POWERMODE.colorful = Boolean('true' == 'true');    // make power mode colorful
+	POWERMODE.shake = Boolean ('false' == 'true');       // turn off shake
 	// TODO 这里根据具体情况修改
 	document.body.addEventListener('input', POWERMODE);
 </script>
