@@ -45,7 +45,7 @@
       if (document.images) {
         var avatar = new Image();
         avatar.src = '/imgs/Gabriel.png'
-        var previews = 'preview1.jpg,preview2.jpg,preview3.jpg,preview4.jpg'.split(',')
+        var previews = 'undefined'.split(',')
         var previewsPreLoad = []
         for(var i = 0; i < length; i++) {
           previewsPreLoad.push(new Image())
@@ -70,7 +70,6 @@
             </button>
             <a href="https://tohsakakuro.github.io">
                 
-                <!-- 这里使用文字(navbar_text or config.title) -->
                 <div class="navbar-brand">空白</div>
                 
             </a>
@@ -176,15 +175,14 @@
                 </div>
                 <div class="col-md-8 gal-right" id="mainstay">
                     
-<div class="alert well fade in" id="gal-issue" role="alert">
-    <!-- TODO 添加关闭公告框功能 -->
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <!-- 这里自行配置公告内容 -->
-    我是谁,我为什么在这里
-    <br>
-    <strong>_到底发生了什么</strong>
-    <!-- 自行配置公告内容结束 -->
-</div>
+    <div class="alert well fade in" id="gal-issue" role="alert">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <a href="#">
+          <strong>我为什么在这里</strong>
+            <br>
+          到底发生了什么
+        </a>
+    </div>
 
 <div id="article-list">
      
@@ -197,54 +195,54 @@
     </div>
     <!-- 大型设备文章 -->
     <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/2018/03/03/my/">
-                    <span>my</span>
-                </a>
-            </h1>
-            <div class="tag-article">
-                
-                    <span class="label label-gal">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                
-                
-                
-                    <span class="label label-gal">
-                        <i class="fa fa-list"></i>
-                        
-                        <a href="/categories/测试分类/">测试分类</a>
-                        
-                    </span>
-                
-                
-                <span class="label label-gal label-gal-tag">
-                    <i class="fa fa-tags"></i>
+        <div class="alert-gal article-body content-article">
+            <!-- <div class="item"> -->     
                     
-                    <a href="/tags/测试标签1/">测试标签1</a>, 
+                        <div class="img">
+                            
+                            <img src="/imgs/preview/preview4.jpg" alt="my">
+                        </div>
+                        <div class="title-article info">
+                            <h1>
+                                <a href="/2018/03/03/my/">
+                                    <span>my</span>
+                                </a>
+                            </h1>
+                            <div class="tag-article">
+                                
+                                    <span class="label label-gal">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+                                
+                                
+                                
+                                    <span class="label label-gal">
+                                        <i class="fa fa-list"></i>
+                                        
+                                        <a href="/categories/测试分类/">测试分类</a>
+                                        
+                                    </span>
+                                
+                                
+                                <span class="label label-gal label-gal-tag">
+                                    <i class="fa fa-tags"></i>
+                                    
+                                    <a href="/tags/测试标签1/">测试标签1</a>, 
+                                    
+                                    <a href="/tags/测试标签2/">测试标签2</a>, 
+                                    
+                                    <a href="/tags/测试标签3/">测试标签3</a>
+                                    
+                                </span>
+                                
+                            </div>
+                            <hr>
+                            <div class="info">
+                                    <p><center><p style="font-size:40px">这里是超大标题</p></center><br><a href="#">测试连接</a><br>作为测试 回车<br>测试第二行 回车<br>
+                            </div>
+                        </div>
                     
-                    <a href="/tags/测试标签2/">测试标签2</a>, 
-                    
-                    <a href="/tags/测试标签3/">测试标签3</a>
-                    
-                </span>
-                
-            </div>
-        </div>
-       
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/2018/03/03/my/">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview2.jpg" alt="my">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
+            <!-- </div> -->
         </div>
     </section>
     <!-- 小型设备文章 -->
@@ -257,39 +255,48 @@
             </h4>
         </div>
         <center>
-            <i class="fa fa-calendar"></i> 2018-03-03
-            <p></p>
+            <p><i class="fa fa-calendar"></i> 2018-03-03</p>
             
-                <i class="fa fa-list"></i>
-                
-                <a href="/categories/测试分类/">测试分类</a>
-                
-                &nbsp;
-            
-            
-                <i class="fa fa-tags"></i>
-                
-                    <a href="/tags/测试标签1/">测试标签1</a>, 
-                
-                    <a href="/tags/测试标签2/">测试标签2</a>, 
-                
-                    <a href="/tags/测试标签3/">测试标签3</a>
-                
-                &nbsp;
+                <div>
+                    <i class="fa fa-list"></i>
+                    
+                    <a href="/categories/测试分类/">测试分类</a>
+                    
+                    &nbsp;
+                </div>
             
             
+                <div>
+                    <i class="fa fa-tags"></i>
+                    
+                        <a href="/tags/测试标签1/">测试标签1</a>, 
+                    
+                        <a href="/tags/测试标签2/">测试标签2</a>, 
+                    
+                        <a href="/tags/测试标签3/">测试标签3</a>
+                    
+                    &nbsp;
+                </div>
             
-                <i class="fa fa-eye"></i>
+            
+            
+                <div><i class="fa fa-eye"></i></div>
             
             <p></p>
         </center>
         <div class="alert alert-gal article-body content-article">
             <p style="text-align: center;">
-                <a href="/2018/03/03/my/">
-                    
-                    <img src="/imgs/preview/preview4.jpg" alt="my">
-                </a>
+                
+                    <div class="img">
+                        
+                        <img src="/imgs/preview/preview2.jpg" alt="my">
+                    </div>
+                
             </p>
+        </div>
+        
+        <div class="alert alert-gal">
+            <p><center><p style="font-size:40px">这里是超大标题</p></center><br><a href="#">测试连接</a><br>作为测试 回车<br>测试第二行 回车<br>
         </div>
         
         <a class="btn btn-danger pull-right read-more btn-block" href="/2018/03/03/my/">
@@ -307,36 +314,36 @@
     </div>
     <!-- 大型设备文章 -->
     <section class="hidden-xs">
-        <div class="title-article">
-            <h1>
-                <a href="/2018/01/26/hello-world/">
-                    <span>Hello World</span>
-                </a>
-            </h1>
-            <div class="tag-article">
-                
-                    <span class="label label-gal">
-                        <i class="fa fa-eye"></i>
-                    </span>
-                
-                
-                
-                
-            </div>
-        </div>
-       
-        <div class="alert alert-gal article-body content-article">
-            <div class="item">
-                <a href="/2018/01/26/hello-world/">
-                    <div class="img">
-                        
-                        <img src="/imgs/preview/preview4.jpg" alt="Hello World">
-                    </div>
-                    <div class="info">
-                        
-                    </div>
-                </a>
-            </div>
+        <div class="alert-gal article-body content-article">
+            <!-- <div class="item"> -->     
+                    
+                        <div class="img">
+                            
+                            <img src="/imgs/preview/preview4.jpg" alt="Hello World">
+                        </div>
+                        <div class="title-article info">
+                            <h1>
+                                <a href="/2018/01/26/hello-world/">
+                                    <span>Hello World</span>
+                                </a>
+                            </h1>
+                            <div class="tag-article">
+                                
+                                    <span class="label label-gal">
+                                        <i class="fa fa-eye"></i>
+                                    </span>
+                                
+                                
+                                
+                                
+                            </div>
+                            <hr>
+                            <div class="info">
+                                    
+                            </div>
+                        </div>
+                    
+            <!-- </div> -->
         </div>
     </section>
     <!-- 小型设备文章 -->
@@ -349,22 +356,23 @@
             </h4>
         </div>
         <center>
-            <i class="fa fa-calendar"></i> 2018-01-26
-            <p></p>
+            <p><i class="fa fa-calendar"></i> 2018-01-26</p>
             
             
             
             
-                <i class="fa fa-eye"></i>
+                <div><i class="fa fa-eye"></i></div>
             
             <p></p>
         </center>
         <div class="alert alert-gal article-body content-article">
             <p style="text-align: center;">
-                <a href="/2018/01/26/hello-world/">
-                    
-                    <img src="/imgs/preview/preview3.jpg" alt="Hello World">
-                </a>
+                
+                    <div class="img">
+                        
+                        <img src="/imgs/preview/preview4.jpg" alt="Hello World">
+                    </div>
+                
             </p>
         </div>
         
@@ -509,11 +517,11 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/测试标签1/" style="font-size: 17.757446190953324px;" class="tag-cloud-link">测试标签1</a>
+    <a href="/tags/测试标签1/" style="font-size: 15.746597158192383px;" class="tag-cloud-link">测试标签1</a>
     
-    <a href="/tags/测试标签2/" style="font-size: 16.095501163553177px;" class="tag-cloud-link">测试标签2</a>
+    <a href="/tags/测试标签2/" style="font-size: 11.593089626527922px;" class="tag-cloud-link">测试标签2</a>
     
-    <a href="/tags/测试标签3/" style="font-size: 10.988882706684622px;" class="tag-cloud-link">测试标签3</a>
+    <a href="/tags/测试标签3/" style="font-size: 18.745640665706965px;" class="tag-cloud-link">测试标签3</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title>my</title>
+      <link href="/2018/03/03/my/"/>
+      <content type="html"><![CDATA[<p><center><p style="font-size:40px">这里是超大标题</p></center><br><a href="#">测试连接</a><br>作为测试 回车<br>测试第二行 回车<br><a id="more"></a><br>接下来是布局测试</p><p><div style="display:flex; border-width:3px; border-style: solid; flex-direction:row; flex-wrap:warp;"><br>    <div style="border:2px solid red;height:79px; width:80px;"><br>    A<br>    </div><br>    <div style="border:2px solid red; clear:left; height: 30px;"><br>    b<br>    </div><br>    <div style="border:2px solid red;"><br>    c<br>    </div><br></div><br>    算了算了搞不定,换一种方法</p>]]></content>
+      
+      <categories>
+          
+          <category> 测试分类 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 测试标签1 </tag>
+            
+            <tag> 测试标签2 </tag>
+            
+            <tag> 测试标签3 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>Hello World</title>
+      <link href="/2018/01/26/hello-world/"/>
+      <content type="html"><![CDATA[<p>Hello World</p>]]></content>
+      
+      
+    </entry>
+    
+  
+  
+</search>
