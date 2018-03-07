@@ -204,10 +204,20 @@
     // 获取当前页数
     var p = query.length > 1 ? query[1].split('=')[1] : 1
     // 获取每页的页码数
-    var pageSize = '10'
+    var pageSize = '7'
     var useLeancloud = 'N9JMRUGNuyD7GGxuwwU2dydm'
     $.getJSON('/content.json', function (json) {
       $('#search-breadcrumb').append(`搜索'${s}'的结果`)
+      /* var ssss=''
+      for(var a in json){
+        for(var b in json[a]){
+
+        ssss+="["+a+"]["+b+"]"+json[a][b]+"-----"
+        }
+        ssss+="======="
+      }
+
+      alert(ssss) */
       var result = getArticles(s, 'posts', json).concat(getArticles(s, 'pages', json))
       if (result.length === 0 || result.length <= (p - 1) * pageSize) {
       	// TODO 显示404页面
@@ -226,45 +236,51 @@
     function displaySearchResult(result) {
       var resultList = $('#article-list')
       result.forEach(function (article) {
-      	var [month, day] = article.date.split('-')
+        var [month, day] = article.date.split('-')
+        var picture_preview = 'undefined'
+        var comment_show = true
         ''
         ''
-        var defaultPreview = '/imgs/preview/preview2.jpg'
+        var defaultPreview = '/imgs/preview/preview1.jpg'
         var preview = article.preview ? article.preview : defaultPreview
         var path = '/' + article.path
         resultList.append(`<div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
-                                <div class="data-article hidden-xs">
-                                    <span class="month">${month}月</span>
-                                    <span class="day">${day}</span>
-                                </div>
-                                <section class="hidden-xs">
-                                    <div class="title-article">
-                                        <h1>
-                                            <a href="${path}">
-                                                <span>${article.title}</span>
-                                            </a>
-                                        </h1>
-                                    </div>
-                                    <div class="tag-article">
+                              <div class="data-article hidden-xs">
+                                  <span class="month">${month}月</span>
+                                  <span class="day">${day}</span>
+                              </div>
+                              <section>
+                                <div class="alert-gal article-body content-article">
+                                  ${picture_preview.enable ?' <div class="img"><img id="picture"></div>':'' }
+                                  <div class="title-article info">
+                                    <div class="hidden-xs device-bg">
+                                      <h1>
+                                        <a href="${path}">
+                                            <span>${article.title}</span>
+                                        </a>
+                                      </h1>
+                                      <div class="tag-article">
                                         ${ useLeancloud ? '<span class="label label-gal"><i class="fa fa-eye"></i></span>' : ''}
-                                        <span class="label label-gal">
-                                            <i class="fa fa-comments"></i>
-                                            <a href="${path}#comments">739</a>
-                                        </span>
+                                        ${ comment_show ? '<span class="label label-gal"><i class="fa fa-comments"></i><a id="comments">739</a></span>' : ''}
+                                      </div>
                                     </div>
-                                    <div class="alert alert-gal article-body content-article">
-                                         <div class="item">
-                                            <a href="${path}">
-                                                <div class="img">
-                                                    <img src="${preview}" alt="${article.title}">
-                                                </div>
-                                                <div class="info">
-                                                    <p>${article.excerpt}</p>
-                                                </div>
-                                            </a>
-                                         </div>
-					                </div>
-					            </section>
+                                    <div class="visible-xs device-xs">
+                                      <h4>
+                                          <a href="${path}">
+                                            <span>${article.title}</span>
+                                          </a>
+                                      </h4>
+                                      <div><i class="fa fa-calendar"></i>${month}月${day}日</div>
+                                    </div>
+                                    <div class="divhr"></div>
+                                    <div class="excerpt">
+                                      <div onclick="javascript:window.location.href='${path}'">
+                                        <span></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </section>
                            </div>`)
       })
       if (useLeancloud) {
@@ -444,11 +460,11 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/测试标签1/" style="font-size: 10.808762747769013px;" class="tag-cloud-link">测试标签1</a>
+    <a href="/tags/测试标签1/" style="font-size: 19.72654499220276px;" class="tag-cloud-link">测试标签1</a>
     
-    <a href="/tags/测试标签2/" style="font-size: 19.196197056580793px;" class="tag-cloud-link">测试标签2</a>
+    <a href="/tags/测试标签2/" style="font-size: 18.681325409068556px;" class="tag-cloud-link">测试标签2</a>
     
-    <a href="/tags/测试标签3/" style="font-size: 12.131218209834374px;" class="tag-cloud-link">测试标签3</a>
+    <a href="/tags/测试标签3/" style="font-size: 12.367780443753706px;" class="tag-cloud-link">测试标签3</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
@@ -578,7 +594,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <script src="/js/blog.js"></script>
 
 <script>
-    window.hot_posts_count = '10'
+    window.hot_posts_count = '7'
     // window.use_leancloud = 'true'
 </script>
 <script src="/js/comment/leancloud.js"></script>
