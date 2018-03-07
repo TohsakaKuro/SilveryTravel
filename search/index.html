@@ -208,16 +208,6 @@
     var useLeancloud = 'N9JMRUGNuyD7GGxuwwU2dydm'
     $.getJSON('/content.json', function (json) {
       $('#search-breadcrumb').append(`搜索'${s}'的结果`)
-      /* var ssss=''
-      for(var a in json){
-        for(var b in json[a]){
-
-        ssss+="["+a+"]["+b+"]"+json[a][b]+"-----"
-        }
-        ssss+="======="
-      }
-
-      alert(ssss) */
       var result = getArticles(s, 'posts', json).concat(getArticles(s, 'pages', json))
       if (result.length === 0 || result.length <= (p - 1) * pageSize) {
       	// TODO 显示404页面
@@ -237,11 +227,11 @@
       var resultList = $('#article-list')
       result.forEach(function (article) {
         var [month, day] = article.date.split('-')
-        var picture_preview = 'undefined'
+        var picture_preview = JSON.parse('{&quot;enable&quot;:true,&quot;url&quot;:[&quot;preview1.jpg&quot;,&quot;preview2.jpg&quot;,&quot;preview3.jpg&quot;,&quot;preview4.jpg&quot;]}'.toString().replace(/&quot;/g, '\"'));
         var comment_show = true
         ''
         ''
-        var defaultPreview = '/imgs/preview/preview1.jpg'
+        var defaultPreview = '/imgs/preview/preview3.jpg'
         var preview = article.preview ? article.preview : defaultPreview
         var path = '/' + article.path
         resultList.append(`<div class="article well clearfix article-body article-excerpt" data-aos="flip-up">
@@ -261,7 +251,6 @@
                                       </h1>
                                       <div class="tag-article">
                                         ${ useLeancloud ? '<span class="label label-gal"><i class="fa fa-eye"></i></span>' : ''}
-                                        ${ comment_show ? '<span class="label label-gal"><i class="fa fa-comments"></i><a id="comments">739</a></span>' : ''}
                                       </div>
                                     </div>
                                     <div class="visible-xs device-xs">
@@ -275,18 +264,32 @@
                                     <div class="divhr"></div>
                                     <div class="excerpt">
                                       <div onclick="javascript:window.location.href='${path}'">
-                                        <span></span>
+                                        <p> </p>
+                                        <span>${ article.excerpt}</span>
                                       </div>
                                     </div>
                                   </div>
                                 </div>
                               </section>
                            </div>`)
+        document.getElementById('picture').setAttribute("src",preview)
+        //放到<div class='tag-article'>里
+        /*
+        ${ comment_show ? '<span class="label label-gal"><i class="fa fa-comments"></i><a id="comments">739</a></span>' : ''}
+        ${ article.categories.data.length > 0 ? '<span class="label lagel-gal" id="categories"><i class="fa fa-list"></i></span>' : ''}
+        ${ article.tags.data.length > 0 ? '<span class="label label-gal label-gal-tag" id="tags"><i class="fa fa-tags"></i></span>' : ''} */
+        /* for(var i in article.categories.data){
+          $('#categories').append('<a href="' + article.categories.data[i].path + '">' + article.categories.data[i].name + "</a>" + i == article.categories.data.length-1 ? '' : ' ')
+        }
+        for(var i in article.tags.data){
+          $('#tags').append('<a href="' + article.tags.data[i].path + '">' + article.tags.data[i].name + "</a>" + i == article.tags.data.length-1 ? '' : ' ')
+        } */
+      
+        if (useLeancloud) {
+          var Counter = AV.Object.extend('Counter')
+          showPostsTime(Counter)
+        }
       })
-      if (useLeancloud) {
-        var Counter = AV.Object.extend('Counter')
-        showPostsTime(Counter)
-      }
     }
 
     function displayPagination(result) {
@@ -460,11 +463,11 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/测试标签1/" style="font-size: 19.72654499220276px;" class="tag-cloud-link">测试标签1</a>
+    <a href="/tags/测试标签1/" style="font-size: 19.523300627309375px;" class="tag-cloud-link">测试标签1</a>
     
-    <a href="/tags/测试标签2/" style="font-size: 18.681325409068556px;" class="tag-cloud-link">测试标签2</a>
+    <a href="/tags/测试标签2/" style="font-size: 8.822278311566002px;" class="tag-cloud-link">测试标签2</a>
     
-    <a href="/tags/测试标签3/" style="font-size: 12.367780443753706px;" class="tag-cloud-link">测试标签3</a>
+    <a href="/tags/测试标签3/" style="font-size: 13.29248790508126px;" class="tag-cloud-link">测试标签3</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
