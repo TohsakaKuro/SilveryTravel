@@ -311,11 +311,11 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/测试标签1/" style="font-size: 14.679765314559617px;" class="tag-cloud-link">测试标签1</a>
+    <a href="/tags/测试标签1/" style="font-size: 18.635155973001872px;" class="tag-cloud-link">测试标签1</a>
     
-    <a href="/tags/测试标签2/" style="font-size: 14.70319691997695px;" class="tag-cloud-link">测试标签2</a>
+    <a href="/tags/测试标签2/" style="font-size: 19.45906621279357px;" class="tag-cloud-link">测试标签2</a>
     
-    <a href="/tags/测试标签3/" style="font-size: 16.356751098418915px;" class="tag-cloud-link">测试标签3</a>
+    <a href="/tags/测试标签3/" style="font-size: 10.365868742612182px;" class="tag-cloud-link">测试标签3</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
@@ -368,18 +368,18 @@
 </div>
 	
 <div id="hexo-helper-live2d">
-  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+  <canvas id="live2dcanvas" width="1200" height="2400"></canvas>
 </div>
 <style>
   #live2dcanvas{
     position: fixed;
-    width: 150px;
-    height: 300px;
-    opacity:0.7;
+    width: 400px;
+    height: 800px;
+    opacity:1;
     right: 0px;
     z-index: 999;
     pointer-events: none;
-    bottom: -20px;
+    bottom: -260px;
   }
 </style>
 <script type="text/javascript" src="/live2d/device.min.js"></script>
@@ -387,11 +387,11 @@
 const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
 (function(){
   if((typeof(device) != 'undefined') && (device.mobile())){
-    document.getElementById("live2dcanvas").style.width = '75px';
-    document.getElementById("live2dcanvas").style.height = '150px';
+    document.getElementById("live2dcanvas").style.width = '200px';
+    document.getElementById("live2dcanvas").style.height = '400px';
   }else
     if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
-  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/nipsilon.model.json", 0.5);});
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/ylia02.model.json", 0.5);});
 })();
 </script>
 

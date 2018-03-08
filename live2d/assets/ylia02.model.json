@@ -1,0 +1,54 @@
+{
+	"version":"Sample 1.0.0",
+	"model":"ylia02.moc",
+	"textures":[
+		"ylia02.2048/texture_00.png"
+	],
+	"hit_areas":
+	[
+		{"name":"breast", "id":"D_REF.PT_BREAST"},
+		{"name":"face", "id":"D_REF.PT_FACE"},
+		{"name":"body", "id":"D_REF.PT_BODy"},
+		{"name":"head", "id":"D_REF.PT_HEAD"}
+	],
+	"motions":{
+		"tap_idle":[
+			{"file":"motions/ylia_03.mtn","sound":"event:/Live2D_168/ylia_03","fade_in":0,"fade_out":0,"words":"哈~"},
+			{"file":"motions/ylia_06.mtn","sound":"event:/Live2D_168/ylia_06","fade_in":0,"fade_out":0,"words":"马~鹿~"},
+			{"file":"motions/ylia_07.mtn","sound":"event:/Live2D_168/ylia_07","fade_in":0,"fade_out":0,"words":"恩……那个……"},
+			{"file":"motions/ylia_08.mtn","sound":"event:/Live2D_168/ylia_08","fade_in":0,"fade_out":0,"words":"好无聊的说~"}
+		],
+		"tap_breast":
+		[
+			{"file":"motions/ylia_04.mtn","sound":"event:/Live2D_168/ylia_04","fade_in":0,"fade_out":0,"words":"请住手~"},
+			{"file":"motions/ylia_05.mtn","sound":"event:/Live2D_168/ylia_05","fade_in":0,"fade_out":0,"words":"不要~"}
+		],
+		"tap_face":
+		[
+			{"file":"motions/ylia_12.mtn","sound":"event:/Live2D_168/ylia_12","fade_in":0,"fade_out":0,"words":"好害羞呀……"}
+		],
+		"tap_body":
+		[
+			{"file":"motions/ylia_13.mtn","sound":"event:/Live2D_168/ylia_13","fade_in":0,"fade_out":0,"words":"人家要生气咯！"},
+			{"file":"motions/ylia_14.mtn","sound":"event:/Live2D_168/ylia_14","fade_in":0,"fade_out":0,"words":"master~H~"}
+		],
+		"tap_head":
+		[
+			{"file":"motions/ylia_09.mtn","sound":"event:/Live2D_168/ylia_09","fade_in":0,"fade_out":0,"words":"再来一次~"},
+			{"file":"motions/ylia_10.mtn","sound":"event:/Live2D_168/ylia_10","fade_in":0,"fade_out":0,"words":"好舒服"}
+		],
+		"tap_hello":
+		[
+			{"file":"motions/ylia_01.mtn","sound":"event:/Live2D_168/ylia_01","fade_in":0,"fade_out":0,"words":"你好~欧尼酱~"}
+		],
+		"tap_dance":
+		[
+			{"file":"motions/ylia_15.mtn","sound":"event:/Live2D_168/ylia_15","fade_in":0,"fade_out":0,"words":"哼哼~哼哼~哼哼哼哼~"}
+		],
+		"tap_change":
+		[
+			{"file":"motions/ylia_11.mtn","sound":"event:/Live2D_168/ylia_11","fade_in":0,"fade_out":0,"words":""}
+		]
+	},
+	"physics":"physics.json"
+}
