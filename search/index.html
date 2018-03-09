@@ -95,52 +95,20 @@
                 
                 
                 
-                <li class="dropdown">
-                    <!-- TODO 添加hover dropdown效果 -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                <li class="">
+                    <a href="/categories">
                         <i class="fa fa-list"></i>分类
                     </a>
-                    <ul class="dropdown-menu">
-                        
-                        
-                        <li>
-                            <a href="/categories/测试分类/">测试分类</a>
-                        </li>
-                        
-                        
-                        
-                    </ul>
                 </li>
                 
                 
                 
                 
                 
-                <li class="dropdown">
-                    <!-- TODO 添加hover dropdown效果 -->
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false" data-hover="dropdown">
+                <li class="">
+                    <a href="/tags">
                         <i class="fa fa-tags"></i>标签
                     </a>
-                    <ul class="dropdown-menu">
-                        
-                        
-                        <li>
-                            <a href="/tags/测试标签1/">测试标签1</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/tags/测试标签2/">测试标签2</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/tags/测试标签3/">测试标签3</a>
-                        </li>
-                        
-                        
-                        
-                    </ul>
                 </li>
                 
                 
@@ -227,7 +195,7 @@
       var resultList = $('#article-list')
       result.forEach(function (article) {
         var [month, day] = article.date.split('-')
-        var picture_preview = JSON.parse('{&quot;enable&quot;:true,&quot;url&quot;:[&quot;preview1.jpg&quot;,&quot;preview2.jpg&quot;,&quot;preview3.jpg&quot;,&quot;preview4.jpg&quot;]}'.toString().replace(/&quot;/g, '\"'));
+        var picture_preview = JSON.parse('{&quot;enable&quot;:true,&quot;url&quot;:[&quot;preview1.jpg&quot;,&quot;preview2.jpg&quot;,&quot;preview4.jpg&quot;,&quot;9d50ec63d14afd6dd9a503f62227d272.jpeg&quot;,&quot;56422576_p0.png&quot;,&quot;56498311_p0.png&quot;,&quot;63988694_p0.png&quot;,&quot;65608454_p0.png&quot;,&quot;66001476_p0.jpg&quot;]}'.toString().replace(/&quot;/g, '\"'));
         var comment_show = true
         ''
         ''
@@ -425,12 +393,6 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/03/03/my/">my</a>
-                </span>
-            </li>
-            
-            <li class="list-group-item">
-                <span class="post-title">
                     <a href="/2018/01/26/hello-world/">Hello World</a>
                 </span>
             </li>
@@ -463,40 +425,18 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/测试标签1/" style="font-size: 14.371007425920636px;" class="tag-cloud-link">测试标签1</a>
-    
-    <a href="/tags/测试标签2/" style="font-size: 19.903172869241835px;" class="tag-cloud-link">测试标签2</a>
-    
-    <a href="/tags/测试标签3/" style="font-size: 8.567587510129506px;" class="tag-cloud-link">测试标签3</a>
-    
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
     
     <li>
-        <a href="http://tohsakakuro.github.io" target="_blank">友情测试1</a>
-    </li>
-    
-    <li>
-        <a href="http://tohsakakuro.github.io" target="_blank">友情测试2</a>
-    </li>
-    
-    <li>
-        <a href="http://tohsakakuro.github.io" target="_blank">友情测试3</a>
+        <a href="https://maho.me/" target="_blank">https://maho.me/</a>
     </li>
     
 </div>
                 <div class="links tab-pane nav bs-sidenav fade" id="sidebar-links">
     
     <li>
-        <a href="http://tohsakakuro.github.io" target="_blank">个人测试1</a>
-    </li>
-    
-    <li>
-        <a href="http://tohsakakuro.github.io" target="_blank">个人测试2</a>
-    </li>
-    
-    <li>
-        <a href="http://tohsakakuro.github.io" target="_blank">个人测试3</a>
+        <a href="https://github.com/TohsakaKuro" target="_blank">GitHub</a>
     </li>
     
 </div>
@@ -520,7 +460,7 @@
 </div>
 	
 <div id="hexo-helper-live2d">
-  <canvas id="live2dcanvas" width="1200" height="2400"></canvas>
+  <canvas id="live2dcanvas" width="400" height="800"></canvas>
 </div>
 <style>
   #live2dcanvas{
@@ -528,7 +468,7 @@
     width: 400px;
     height: 800px;
     opacity:1;
-    right: 0px;
+    right: -80px;
     z-index: 999;
     pointer-events: none;
     bottom: -260px;
@@ -537,14 +477,23 @@
 <script type="text/javascript" src="/live2d/device.min.js"></script>
 <script type="text/javascript">
 const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
-(function(){
-  if((typeof(device) != 'undefined') && (device.mobile())){
-    document.getElementById("live2dcanvas").style.width = '200px';
-    document.getElementById("live2dcanvas").style.height = '400px';
+loadScript("/live2d/script.js", function(){
+  loadlive2d("live2dcanvas", "/live2d/assets/ylia02.model.json", 0.5);});
+  
+</script>
+<script>
+  window.onload=function(){if(typeof(device) != 'undefined'){
+    if(device.mobile()){
+      var trElement = document.getElementById('hexo-helper-live2d');
+         trElement.parentNode.removeChild(trElement);
+         return;
+    }else{
+      document.getElementById("live2dcanvas").width = '800';
+      document.getElementById("live2dcanvas").height = '1600';
+    }
+    
   }else
-    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
-  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/ylia02.model.json", 0.5);});
-})();
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');}
 </script>
 
 </body>
@@ -590,7 +539,7 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 </script>
 <script>
     window.slideConfig = {
-      bgurl: '/imgs/slide/background.png'
+      bgurl: '/imgs/slide/colors_and_flower_pattern_in_japanese_style_WA01_004L.jpg'
     }
 </script>
 <script src="/js/hs.js"></script>
