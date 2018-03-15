@@ -227,10 +227,12 @@
     </div>
     <div class="divhr"></div>
     <div class="content-article">
-        <p>&ensp;&ensp;&ensp;&ensp;这几天公司要发布产品测试版本了,我负责准备了数据库的部署脚本<br>&ensp;&ensp;&ensp;&ensp;本来对数据库不太熟悉,但也只能硬着头皮上了。在这里记录下遇到的一些问题。<br><a id="more"></a><br>（不要吐槽没有代码格式）</p>
-<p>问题一：在遍历一个库并向表字段添加注释的时候<br>     SELECT * FROM DBA_COL_COMMENTS WHERE OWNER = ‘TOHSAKA_KURO’<br>     在其中发现了表名以 Bin&amp; 开头的表名，类似 Bin&amp;()#J$@IHeworjwo— 之类的表，这些表是Oracle 10g 之后的回收表，类似于windows系统回收站文件。这些表是被删除后重命名的。如果直接根据这个查询结果遍历添加表字段注释这肯定不行的。对于这些回收表是添加不上表字段注释的。所以我们需要从结果中剔除这些表。<br>     一个笨方法是关联到 DBA_TABLES 表来查询正常的表。<br>     SELECT * FROM DBA_COL_COMMENTS DCC, DBA_TABLES DT WHERE DCC.TABLE_NAME = DT.TABLE_NAME AND DCC.OWNER = ‘TOHSAKA_KURO’<br>     这样的话就可以对游标遍历并添加表字段注释了。</p>
-<p>问题二：本来我是在每次执行语句之前都习惯性做系统打印。<br>    这次对于整个库遍历，循环有点多，然后我的习惯导致了服务器输出窗口被装满，无法继续输出。<br>    DBMS_OUTPUT.PUT_LINE()语句是不能用太多的，否则就会碰到像我一样的问题。</p>
-<p>问题三：最开始没想到 DECLARE 是不能单独用的。<br>    DECLARE 之后一定要有 BEGIN END 关键字。</p>
+        <p>&ensp;&ensp;&ensp;&ensp;这几天公司要发布产品测试版本了,我负责准备了数据库的部署脚本<br>&ensp;&ensp;&ensp;&ensp;本来对数据库不太熟悉,但也只能硬着头皮上了。在这里记录下遇到的一些问题。<br><a id="more"></a><br>（不要吐槽我了）</p>
+<h3 id="某些情况下是能够看到回收站表的影子的"><a href="#某些情况下是能够看到回收站表的影子的" class="headerlink" title="某些情况下是能够看到回收站表的影子的"></a>某些情况下是能够看到回收站表的影子的</h3><p>在遍历一个库并向表字段添加注释的时候比如<br><code>SELECT * FROM DBA_COL_COMMENTS WHERE OWNER = &#39;TOHSAKA_KURO&#39;</code><br>发现了表名以 Bin&amp; 开头的表名，类似 Bin&amp;()#J$@IHeworjwo— 之类的表，这些表是Oracle 10g 之后的回收表，类似于windows系统回收站文件。这些表是被删除后重命名的。如果直接根据这个查询结果遍历添加表字段注释这肯定不行的。对于这些回收表是添加不上表字段注释的。所以我们需要从结果中剔除这些表。</p>
+<p> 一个笨方法是关联到 DBA_TABLES 表来查询正常的表。<br><code>SELECT * FROM DBA_COL_COMMENTS DCC, DBA_TABLES DT WHERE DCC.TABLE_NAME = DT.TABLE_NAME AND DCC.OWNER = &#39;TOHSAKA_KURO&#39;</code></p>
+<p>这样的话就可以对游标遍历并添加表字段注释了。</p>
+<h3 id="系统打印缓存是有上限的"><a href="#系统打印缓存是有上限的" class="headerlink" title="系统打印缓存是有上限的"></a>系统打印缓存是有上限的</h3><p>本来我是在每次执行语句之前都习惯性做系统打印。<br>这次对于整个库遍历，循环有点多，然后我的习惯导致了服务器输出窗口被装满，无法继续输出。<br><code>DBMS_OUTPUT.PUT_LINE()</code>语句是不能用太多的，否则就会碰到像我一样的问题。</p>
+<h3 id="DECLARE-关键字是不能单独出现的"><a href="#DECLARE-关键字是不能单独出现的" class="headerlink" title="DECLARE 关键字是不能单独出现的"></a>DECLARE 关键字是不能单独出现的</h3><p>DECLARE 之后一定要有 BEGIN END 关键字。<br>刚开始我还纳闷怎么一直编译不通过。直到自己看了一眼提示。。。</p>
 
     </div>
 </article>
@@ -328,9 +330,9 @@
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/oracle/" style="font-size: 16.71851961159922px;" class="tag-cloud-link">oracle</a>
+    <a href="/tags/oracle/" style="font-size: 17.02421009201781px;" class="tag-cloud-link">oracle</a>
     
-    <a href="/tags/数据库/" style="font-size: 19.449145996609786px;" class="tag-cloud-link">数据库</a>
+    <a href="/tags/数据库/" style="font-size: 11.125200726284618px;" class="tag-cloud-link">数据库</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
