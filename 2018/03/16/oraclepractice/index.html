@@ -12,7 +12,7 @@
     
     
     
-    <title>archive_a | 空白</title>
+    <title>Oracle 偶记 | 空白</title>
     <link href=”https://tohsakakuro.github.io“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -86,7 +86,7 @@
                 
                 
                 
-                <li class="current">
+                <li class="">
                     <a href="/archives">
                         <i class="fa fa-archive"></i>归档
                     </a>
@@ -170,51 +170,72 @@
                     </aside>
                 </div>
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <article class="article well article-body" id="article-archive">
+                    
+<article class="article well article-body" id="article">
     <div class="breadcrumb">
         <i class="fa fa-home"></i>
         <a href="https://tohsakakuro.github.io">空白</a>
         >
-        <span>归档</span>
+        <span>Oracle 偶记</span>
     </div>
-    <!-- 大型设备详细文章 -->
-    <div class="hidden-xs">
-        <div class="title-article">
+    <div class="title-article">
+        <!-- 大型设备详细文章 -->
+        <div class="hidden-xs device-bg">
             <h1>
-                <a href="/archives">归档</a>
+                <a href="/2018/03/16/oraclepractice/">
+                    <span>Oracle 偶记</span>
+                </a>
             </h1>
+            
+                <div class="tag-article">
+                    
+                    <span class="label label-gal">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                    
+                    
+                    
+                        <span class="label label-gal">
+                            <i class="fa fa-list"></i>
+                            
+                            <a href="/categories/编程技术/">编程技术</a>
+                            
+                        </span>
+                    
+                    
+                    <span class="label label-gal label-gal-tag">
+                        <i class="fa fa-tags"></i>
+                        
+                        <a href="/tags/oracle/">oracle</a>, 
+                        
+                        <a href="/tags/数据库/">数据库</a>
+                        
+                    </span>
+                    
+                </div>
+            
         </div>
-    </div>
-    <!-- 小型设备详细文章 -->
-    <div class="visible-xs">
-        <center>
-            <div class="title-article">
+        <div class="visible-xs device-xs">
                 <h4>
-                    <a href="/archives">归档</a>
+                    <a href="/2018/03/16/oraclepractice/">
+                        <span>Oracle 偶记</span>
+                    </a>
                 </h4>
+                <div><i class="fa fa-calendar"></i> 2018-03-16</div>
+                
             </div>
-        </center>
     </div>
-    <div class="content-article" style="margin-top: 30px;">
-        
-        
-            <h1 style="font-size: 24px; margin-top: 40px;">2018年</h1>
-            
-        <div class="alert alert-info" style="font-size: 14px; line-height: 2; font-weight: bold;">
-            
-             
-             
-                        <a href="/2018/03/16/oraclepractice/">Oracle 偶记</a>
-                        <br>
-            
-             
-                        <a href="/2018/01/26/hello-world/">Hello World</a>
-                        <br>
-            
-                    </div>
-        
+    <div class="divhr"></div>
+    <div class="content-article">
+        <p>&ensp;&ensp;&ensp;&ensp;这几天公司要发布产品测试版本了,我负责准备了数据库的部署脚本<br>&ensp;&ensp;&ensp;&ensp;本来对数据库不太熟悉,但也只能硬着头皮上了。在这里记录下遇到的一些问题。<br><a id="more"></a><br>（不要吐槽没有代码格式）</p>
+<p>问题一：在遍历一个库并向表字段添加注释的时候<br>     SELECT * FROM DBA_COL_COMMENTS WHERE OWNER = ‘TOHSAKA_KURO’<br>     在其中发现了表名以 Bin&amp; 开头的表名，类似 Bin&amp;()#J$@IHeworjwo— 之类的表，这些表是Oracle 10g 之后的回收表，类似于windows系统回收站文件。这些表是被删除后重命名的。如果直接根据这个查询结果遍历添加表字段注释这肯定不行的。对于这些回收表是添加不上表字段注释的。所以我们需要从结果中剔除这些表。<br>     一个笨方法是关联到 DBA_TABLES 表来查询正常的表。<br>     SELECT * FROM DBA_COL_COMMENTS DCC, DBA_TABLES DT WHERE DCC.TABLE_NAME = DT.TABLE_NAME AND DCC.OWNER = ‘TOHSAKA_KURO’<br>     这样的话就可以对游标遍历并添加表字段注释了。</p>
+<p>问题二：本来我是在每次执行语句之前都习惯性做系统打印。<br>    这次对于整个库遍历，循环有点多，然后我的习惯导致了服务器输出窗口被装满，无法继续输出。<br>    DBMS_OUTPUT.PUT_LINE()语句是不能用太多的，否则就会碰到像我一样的问题。</p>
+<p>问题三：最开始没想到 DECLARE 是不能单独用的。<br>    DECLARE 之后一定要有 BEGIN END 关键字。</p>
+
     </div>
 </article>
+
+<!--  -->
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -290,26 +311,26 @@
             <ul class="nav nav-pills pills-gal">
                 
                     <li class="">
-                        <a href="/archives/2018/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                        <a href="/2018/03/16/oraclepractice/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                     </li>
                 
                 
                     <li class="">
-                        <a href="/archives/2018/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                        <a href="/2018/03/16/oraclepractice/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                     </li>
                 
                 
                     <li class="">
-                        <a href="/archives/2018/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                        <a href="/2018/03/16/oraclepractice/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                     </li>
                 
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/oracle/" style="font-size: 9.19029120176183px;" class="tag-cloud-link">oracle</a>
+    <a href="/tags/oracle/" style="font-size: 16.71851961159922px;" class="tag-cloud-link">oracle</a>
     
-    <a href="/tags/数据库/" style="font-size: 19.950912374568155px;" class="tag-cloud-link">数据库</a>
+    <a href="/tags/数据库/" style="font-size: 19.449145996609786px;" class="tag-cloud-link">数据库</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
