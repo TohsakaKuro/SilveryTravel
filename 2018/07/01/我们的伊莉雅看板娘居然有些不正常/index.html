@@ -12,7 +12,7 @@
     
     
     
-    <title>404 | 空白</title>
+    <title>我们的伊莉雅看板娘居然有些不正常 | 空白</title>
     <link href=”https://tohsakakuro.github.io“ rel=”prefetch” />
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -178,11 +178,73 @@
                     </aside>
                 </div>
                 <div class="col-md-8 gal-right" id="mainstay">
-                    <!-- 搜索页面(尽可能接近ZanBlog搜索功能) -->
+                    
+<article class="article well article-body" id="article">
+    <div class="breadcrumb">
+        <i class="fa fa-home"></i>
+        <a href="https://tohsakakuro.github.io">空白</a>
+        >
+        <span>我们的伊莉雅看板娘居然有些不正常</span>
+    </div>
+    <div class="title-article">
+        <!-- 大型设备详细文章 -->
+        <div class="hidden-xs device-bg">
+            <h1>
+                <a href="/2018/07/01/我们的伊莉雅看板娘居然有些不正常/">
+                    <span>我们的伊莉雅看板娘居然有些不正常</span>
+                </a>
+            </h1>
+            
+                <div class="tag-article">
+                    
+                    <span class="label label-gal">
+                        <i class="fa fa-eye"></i>
+                    </span>
+                    
+                    
+                    
+                        <span class="label label-gal">
+                            <i class="fa fa-list"></i>
+                            
+                            <a href="/categories/小零件/">小零件</a>
+                            
+                        </span>
+                    
+                    
+                    <span class="label label-gal label-gal-tag">
+                        <i class="fa fa-tags"></i>
+                        
+                        <a href="/tags/live2d/">live2d</a>
+                        
+                    </span>
+                    
+                </div>
+            
+        </div>
+        <div class="visible-xs device-xs">
+                <h4>
+                    <a href="/2018/07/01/我们的伊莉雅看板娘居然有些不正常/">
+                        <span>我们的伊莉雅看板娘居然有些不正常</span>
+                    </a>
+                </h4>
+                <div><i class="fa fa-calendar"></i> 2018-07-01</div>
+                
+            </div>
+    </div>
+    <div class="divhr"></div>
+    <div class="content-article">
+        <p>&ensp;&ensp;&ensp;&ensp;最开始的看板娘总是奇奇怪怪的。如果不缩放，看板娘就不够清晰可爱。如果大幅度缩放，她又不肯正眼看我。。。<br>&ensp;&ensp;&ensp;&ensp;她是不是坏掉了？需要修理了？<br>&ensp;&ensp;&ensp;&ensp;github hexo-helper-live2d 包中的一个小问题<br><a id="more"></a></p>
+<h3 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h3><p>在live2d缩放度不是1的时候，鼠标的区域不自然，角色不会跟着鼠标转头，就像是，鼠标放在哪里都像放在角色的左上角一样，她是不会往下看或者往右看的。<br><img src="/2018/07/01/我们的伊莉雅看板娘居然有些不正常/2018/07/01/我们的伊莉雅看板娘居然有些不正常/1.png" title="这什么神经问题啊"></p>
+<h3 id="考虑分析"><a href="#考虑分析" class="headerlink" title="考虑分析"></a>考虑分析</h3><p>在源码中缩放的原理是先定义一个长宽乘以缩放倍数的大画&lt;canvas&gt;,然后再调节画布的大小到正常,即让系统先绘制一个巨大的图像再使它变小来让图像缩放更清晰。在这就可以考虑，是不是初始化的画布大小限制了鼠标区域？</p>
+<h3 id="案件测试"><a href="#案件测试" class="headerlink" title="案件测试"></a>案件测试</h3><p>立即着手进行测试，调节不同的缩放倍数。2倍缩放的时候，鼠标放到div最下端，角色能够达到平视。鼠标放到div最右端，角色能够达到直视。<br>有些眉目了，那么再改变更高的缩放倍数。10倍。鼠标放到div最下端，角色依然是仰视，鼠标放到div最右端，角色还是朝左看！<br>是的就是这样，鼠标对live2d的作用区域在第一次绘制画布的时候就确定并且不再更改了！而且，超出div之外的鼠标作用区域就会失效。</p>
+<img src="/2018/07/01/我们的伊莉雅看板娘居然有些不正常/2018/07/01/我们的伊莉雅看板娘居然有些不正常/2.png" title="这什么神经问题啊">
+<h3 id="修改方案"><a href="#修改方案" class="headerlink" title="修改方案"></a>修改方案</h3><p>既然问题确定了，那么一切都好办了。那么我们先画一个正常大小的画布，在角色绘制完成后，鼠标区域固定了，然后我们让系统把角色拉大，再通过样式控制画布变小，这样不就一切正常了吗。。<br>着手修改调试。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;canvas id=&quot;$&#123;config.id&#125;&quot; width=&quot;$&#123;config.width&#125;&quot; height=&quot;$&#123;config.height&#125;&quot;&gt;&lt;/canvas&gt; </span><br><span class="line">&lt;style&gt;</span><br><span class="line">#$&#123;config.id&#125;&#123;</span><br><span class="line">    position: fixed;</span><br><span class="line">    width: $&#123;config.width&#125;px;</span><br><span class="line">    height: $&#123;config.height&#125;px;</span><br><span class="line">    opacity:$&#123;config.opacityDefault&#125;;</span><br><span class="line">    $&#123;config.position&#125;: $&#123;config.horizontalOffset&#125;px;</span><br><span class="line">    z-index: 999;</span><br><span class="line">    pointer-events: none;</span><br><span class="line">    bottom: $&#123;config.verticalOffset&#125;px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">document.getElementById(&quot;$&#123;config.id&#125;&quot;).width = &apos;$&#123;config.width * config.scaling&#125;&apos;;</span><br><span class="line">document.getElementById(&quot;$&#123;config.id&#125;&quot;).height = &apos;$&#123;config.height * config.scaling&#125;&apos;;</span><br></pre></td></tr></table></figure></p>
+<p>好了，正常啦。</p>
 
-<!-- 404 自定义页面 -->
-<!-- 有其他想自定义的page在这里添加判断条件, 并且写好对应的模板渲染文件 -->
+    </div>
+</article>
 
+<!--  -->
                 </div>
                 <aside class="col-md-4 gal-left" id="sidebar">
     <!-- 此为sidebar的搜索框, 非搜索结果页面 -->
@@ -258,28 +320,28 @@
             <ul class="nav nav-pills pills-gal">
                 
                     <li class="">
-                        <a href="/404/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                        <a href="/2018/07/01/我们的伊莉雅看板娘居然有些不正常/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                     </li>
                 
                 
                     <li class="">
-                        <a href="/404/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                        <a href="/2018/07/01/我们的伊莉雅看板娘居然有些不正常/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                     </li>
                 
                 
                     <li class="">
-                        <a href="/404/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                        <a href="/2018/07/01/我们的伊莉雅看板娘居然有些不正常/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                     </li>
                 
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/oracle/" style="font-size: 10.09638209722781px;" class="tag-cloud-link">oracle</a>
+    <a href="/tags/oracle/" style="font-size: 13.969037079157157px;" class="tag-cloud-link">oracle</a>
     
-    <a href="/tags/数据库/" style="font-size: 15.603779288138849px;" class="tag-cloud-link">数据库</a>
+    <a href="/tags/数据库/" style="font-size: 8.29536675950649px;" class="tag-cloud-link">数据库</a>
     
-    <a href="/tags/live2d/" style="font-size: 12.144084588819705px;" class="tag-cloud-link">live2d</a>
+    <a href="/tags/live2d/" style="font-size: 17.794840388811338px;" class="tag-cloud-link">live2d</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
