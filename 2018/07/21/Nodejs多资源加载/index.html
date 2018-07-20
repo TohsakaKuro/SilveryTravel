@@ -131,15 +131,15 @@
                         
                         
                         <li>
-                            <a href="/tags/node-js/">node.js</a>
-                        </li>
-                        
-                        <li>
-                            <a href="/tags/live2d/">live2d</a>
-                        </li>
-                        
-                        <li>
                             <a href="/tags/oracle/">oracle</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/数据库/">数据库</a>
+                        </li>
+                        
+                        <li>
+                            <a href="/tags/node-js/">node.js</a>
                         </li>
                         
                         
@@ -194,7 +194,7 @@
         <!-- 大型设备详细文章 -->
         <div class="hidden-xs device-bg">
             <h1>
-                <a href="/2018/07/21/nodejs同时进行多个异步资源加载/">
+                <a href="/2018/07/21/Nodejs多资源加载/">
                     <span>nodejs同时进行多个异步资源加载</span>
                 </a>
             </h1>
@@ -227,7 +227,7 @@
         </div>
         <div class="visible-xs device-xs">
                 <h4>
-                    <a href="/2018/07/21/nodejs同时进行多个异步资源加载/">
+                    <a href="/2018/07/21/Nodejs多资源加载/">
                         <span>nodejs同时进行多个异步资源加载</span>
                     </a>
                 </h4>
@@ -237,13 +237,18 @@
     </div>
     <div class="divhr"></div>
     <div class="content-article">
-        <p>&ensp;&ensp;&ensp;&ensp;现在有这种情况:小明在学校忘记带身份证和学生证，小明去请假却必须要这两个证件（例子不恰当你们就不要管了）。偏偏这两个证件落在了两个不同的地方。这时候小明就叫了两个朋友去帮他取回这两个资源。只有小明等到了这两个资源后，小明请假这个事件才能执行下去。<br>我们在程序里不经常会遇到这种情况吗？<br><a id="more"></a></p>
-<p>一个方法需要等待两项（或者更多）资源后才能进行下去，比如我们需要一个文件的内容以及一个数据库查询结果。<br>效率最大化，我们当然是想让两项资源同时去获取，而不是先进行一个获取资源行为让另一个获取资源行为等待着。</p>
-<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise?"></a>Promise?</h3><p>promise主要是为了解决js中多个异步回调难以维护和控制的问题.<br>我们想要最大效率化处理小明的问题,就可以这样做:<br><code>Promise.all([fun1(), fun2()]).then(fun3());</code><br>fun1是小明朋友拿身份证,fun2是小明朋友拿学生证,fun3是小明请假…</p>
-<p>promise还可以这样:假如小明派了两个朋友去拿身份证,那么任何一个人拿到身份证都可以继续下去,就是<br><code>Promise.race([fun1(), fun2()]).then(fun3());</code><br>fun1是小明朋友a拿身份证,fun2是小明朋友2拿身份证,fun3…是小明拿到身份证后要做的事情(虽然事实上身份证只能一人拿到,但程序里两个朋友都可以拿到,只不过后来那个被丢弃了)</p>
-<h3 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调?"></a>异步回调?</h3><p>异步回调（ 执行完一件事，才能接着往下执行），如果出现多次，就会产生多层嵌套，维护和控制异步过程非常的麻烦和困难(深有感触)<br>Promise就可以非常灵活的调整它们,比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(function () &#123;</span><br><span class="line">    var i = 1;</span><br><span class="line">    console.log(i);</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">        i++;</span><br><span class="line">        console.log(i);</span><br><span class="line">        setTimeout(function () &#123;</span><br><span class="line">            i++;</span><br><span class="line">            console.log(i);</span><br><span class="line">        &#125;, 1000);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">&#125;, 1000);</span><br></pre></td></tr></table></figure></p>
-<p>可以变成更好看的下面代码(除了最后一行,还是丑):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function next( n )&#123;</span><br><span class="line">    return new Promise( function( resolve, reject )&#123;</span><br><span class="line">        setTimeout( function()&#123;</span><br><span class="line">            console.log( n )</span><br><span class="line">            n++;</span><br><span class="line">            resolve( n );</span><br><span class="line">        &#125;, 1000 );</span><br><span class="line">    &#125; );</span><br><span class="line">&#125;</span><br><span class="line">next( 1 ).then(next).then(next);</span><br></pre></td></tr></table></figure></p>
-<p>是不是很难理解？没事我也一头雾水。<br>当我们执行next( 1 )的时候，在next函数中返回一个promise对象，一秒钟之后，输出1，然后通过resolve把n( 就是 2 ）传递给then方法的第一个function，即next(2) ,然后再通过resolve把3传递给下一个next()。没有了接下来的then方法，resolve(n)也不会执行下去了.<br>上面代码的最后一行是不合理的,我们应该在最后加上catch()方法,即next( 1 ).then(next).then(next).catch(function(){…});用来处理上面next()方法体中执行reject(n)方法(别说了我知道上面没有,你就不能想像一下可能有).上面最后一行代码的任何then()方法中执行了reject(),都会跳过剩下的then()方法直接执行catch().</p>
+        <p>&ensp;&ensp;&ensp;&ensp;现在有这种情况:小明在学校忘记带身份证和学生证,小明去请假却必须要这两个证件(例子不恰当你们就不要管了).偏偏这两个证件落在了两个不同的地方.这时候小明就叫了两个朋友去帮他取回这两个资源.只有小明等到了这两个资源后,小明请假这个事件才能执行下去.<br>我们在程序里不经常会遇到这种情况吗？<br><a id="more"></a></p>
+<p>一个方法需要等待两项(或者更多)资源后才能进行下去,比如我们需要一个文件的内容以及一个数据库查询结果.<br>效率最大化,我们当然是想让两项资源同时去获取,而不是先进行一个获取资源行为让另一个获取资源行为等待着.</p>
+<h3 id="Promise"><a href="#Promise" class="headerlink" title="Promise?"></a>Promise?</h3><p>promise主要是为了解决js中多个异步回调难以维护和控制的问题.<br>我们想要最大效率化处理小明的问题,就可以这样做:</p>
+<p><code>Promise.all([fun1(), fun2()]).then(fun3());</code></p>
+<p>fun1是小明朋友拿身份证,fun2是小明朋友拿学生证,fun3是小明请假…</p>
+<p>promise还可以这样:假如小明派了两个朋友去拿身份证,那么任何一个人拿到身份证都可以继续下去,就是</p>
+<p><code>Promise.race([fun1(), fun2()]).then(fun3());</code></p>
+<p>fun1是小明朋友a拿身份证,fun2是小明朋友2拿身份证,fun3…是小明拿到身份证后要做的事情(虽然事实上身份证只能一人拿到,但程序里两个朋友都可以拿到,只不过后来那个被丢弃了)</p>
+<h3 id="异步回调"><a href="#异步回调" class="headerlink" title="异步回调?"></a>异步回调?</h3><p>异步回调(执行完一件事,才能接着往下执行),如果出现多次,就会产生多层嵌套,维护和控制异步过程非常的麻烦和困难(深有感触)<br>Promise就可以非常灵活的调整它们,比如:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">setTimeout(function () &#123;</span><br><span class="line">    var i = 1;</span><br><span class="line">    console.log(i);</span><br><span class="line">    setTimeout(function () &#123;</span><br><span class="line">        i++;</span><br><span class="line">        console.log(i);</span><br><span class="line">        setTimeout(function () &#123;</span><br><span class="line">            i++;</span><br><span class="line">            console.log(i);</span><br><span class="line">        &#125;, 1000);</span><br><span class="line">    &#125;, 1000);</span><br><span class="line">&#125;, 1000);</span><br></pre></td></tr></table></figure></p>
+<p>可以变成更好看的下面代码(除了最后一行,还是丑):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function next(n)&#123;</span><br><span class="line">    return new Promise(function(resolve, reject)&#123;</span><br><span class="line">        setTimeout(function()&#123;</span><br><span class="line">            console.log(n)</span><br><span class="line">            n++;</span><br><span class="line">            resolve(n);</span><br><span class="line">        &#125;, 1000);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line">next(1).then(next).then(next);</span><br></pre></td></tr></table></figure></p>
+<p>是不是很难理解？没事我也一头雾水.<br>当我们执行next(1)的时候,在next函数中返回一个promise对象,一秒钟之后,输出1,然后通过resolve把n(就是 2)传递给then方法的第一个function,即next(2) ,然后再通过resolve把3传递给下一个next().没有了接下来的then方法,resolve(n)也不会执行下去了.</p>
+<p>上面代码的最后一行是不合理的,我们应该在最后加上catch()方法,即next(1).then(next).then(next).catch(function(){…});用来处理上面next()方法体中执行reject(n)方法(别说了我知道上面没有,你就不能想像一下可能有).上面最后一行代码的任何then()方法中执行了reject(),都会跳过剩下的then()方法直接执行catch().</p>
 <p>还不得听那个什么什么月的话</p>
 
     </div>
@@ -304,7 +309,7 @@
             
             <li class="list-group-item">
                 <span class="post-title">
-                    <a href="/2018/07/21/nodejs同时进行多个异步资源加载/">nodejs同时进行多个异步资源加载</a>
+                    <a href="/2018/07/21/Nodejs多资源加载/">nodejs同时进行多个异步资源加载</a>
                 </span>
             </li>
             
@@ -331,30 +336,30 @@
             <ul class="nav nav-pills pills-gal">
                 
                     <li class="">
-                        <a href="/2018/07/21/nodejs同时进行多个异步资源加载/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
+                        <a href="/2018/07/21/Nodejs多资源加载/index.html#sidebar-tags" data-toggle="tab" id="tags-tab">热门标签</a>
                     </li>
                 
                 
                     <li class="">
-                        <a href="/2018/07/21/nodejs同时进行多个异步资源加载/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
+                        <a href="/2018/07/21/Nodejs多资源加载/index.html#sidebar-friend-links" data-toggle="tab" id="friend-links-tab">友情链接</a>
                     </li>
                 
                 
                     <li class="">
-                        <a href="/2018/07/21/nodejs同时进行多个异步资源加载/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
+                        <a href="/2018/07/21/Nodejs多资源加载/index.html#sidebar-links" data-toggle="tab" id="links-tab">个人链接</a>
                     </li>
                 
             </ul>
             <div class="tab-content">
                 <div class="cloud-tags tab-pane nav bs-sidenav fade" id="sidebar-tags">
     
-    <a href="/tags/node-js/" style="font-size: 13.910327904082965px;" class="tag-cloud-link">node.js</a>
+    <a href="/tags/oracle/" style="font-size: 16.55791927863386px;" class="tag-cloud-link">oracle</a>
     
-    <a href="/tags/live2d/" style="font-size: 17.89406664301562px;" class="tag-cloud-link">live2d</a>
+    <a href="/tags/数据库/" style="font-size: 8.157362983396572px;" class="tag-cloud-link">数据库</a>
     
-    <a href="/tags/oracle/" style="font-size: 14.111145292539568px;" class="tag-cloud-link">oracle</a>
+    <a href="/tags/node-js/" style="font-size: 9.43216973535467px;" class="tag-cloud-link">node.js</a>
     
-    <a href="/tags/数据库/" style="font-size: 11.887761628455495px;" class="tag-cloud-link">数据库</a>
+    <a href="/tags/live2d/" style="font-size: 15.98814978271561px;" class="tag-cloud-link">live2d</a>
     
 </div>
                 <div class="friend-links tab-pane nav bs-sidenav fade" id="sidebar-friend-links">
