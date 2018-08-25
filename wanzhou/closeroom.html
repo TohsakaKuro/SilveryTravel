@@ -50,10 +50,19 @@
     <script type="text/javascript">
         $(document).ready(function(){
           $("#closeroom").click(function(){
-              $.get("http://47.92.52.135:9001/http_dissolve_room", { "roomId": $("#roomId").val(),"sign":hex_md5($("#roomId").val()+"~!@#$(*&^%$&"), }, function(req) {
-                     alert(req.vcResult);
-                     $("#roomId").val("")
-              });
+               $.ajax({
+                    type: "get",
+                    url: "47.92.52.135:9001/http_dissolve_room",
+                    data: {
+                        roomId: $("#roomId").val(),
+                        sign:hex_md5($("#roomId").val()+"~!@#$(*&^%$&")
+                    },
+                    contentType: 'application/json',
+                    success: function (data, status) {
+                        alert(data.vcResult);
+                        $("#roomId").val("")
+                    }
+                })
           });
         });
     </script>
