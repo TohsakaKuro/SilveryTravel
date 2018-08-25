@@ -6,20 +6,41 @@
     <meta name="author" content="银">
     
     <meta name="description" content="就不编辑个性签名">
-    
-    
-    
-    
-    
-    
     <title>空白</title>
     <link href=”https://tohsakakuro.github.io“ rel=”prefetch” />
-    <script src="../js/md5.js" type="text/javascript"></script>
-    <script src="../js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/md5.js" type="text/javascript"></script>
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <style>
+        div{
+            padding: 20px;
+            text-align: center;
+        }
+        #roomId{
+            border: 1px solid #feb7d1;
+            box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075), 0px 0px 10px #feb7d1;
+            border-radius: 2px;
+            height: 30px;
+            width: 200px;
+            color: pink;
+            font-size: 22px;
+            padding-left: 20px;
+            letter-spacing: 8px;
+        }
+        #closeroom{
+            text-align: center;
+            color: #fff;
+            border: 1px solid #feb7d1;
+            background-color: #feb7d1;
+            border-radius: 2px;
+            width: 120px;
+            height: 40px;
+            font-size: 22px;
+        }
+    </style>
 </head>
 <body>
-    <div style="align:center"><input id = "roomId" /></div>
-    <button style="align:center" id="closeroom">关闭房间</button>
+    <div><input id = "roomId" /></div>
+    <div><button id="closeroom">关闭房间</button></div>
     <script type="text/javascript">
         $(document).ready(function(){
           $("#closeroom").click(function(){
