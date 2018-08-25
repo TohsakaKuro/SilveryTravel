@@ -39,7 +39,7 @@
             background-color: #feb7d1;
             border-radius: 5px;
             width: 200px;
-            height: 40px;
+            height: 30px;
             font-size: 22px;
         }
     </style>
@@ -52,6 +52,7 @@
           $("#closeroom").click(function(){
               $.get("http://47.92.52.135:9001/http_dissolve_room", { "roomId": $("#roomId").val(),"sign":hex_md5($("#roomId").val()+"~!@#$(*&^%$&"), }, function(req) {
                      alert(req.vcResult);
+                     $("#roomId").val("")
               });
           });
         });
