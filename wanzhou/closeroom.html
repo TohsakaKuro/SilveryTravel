@@ -19,13 +19,12 @@
 </head>
 <body>
     <div style="align:center"><input id = "roomId" /></div>
-    <div style="align:center" id="closeroom">关闭房间</div>
+    <button style="align:center" id="closeroom">关闭房间</button>
     <script type="text/javascript">
         $(document).ready(function(){
           $("#closeroom").click(function(){
-              alert($("#roomId").val());
-              $.get("http://47.92.52.135:9001/http_dissolve_room", { "roomId": $("#roomId").val() }, function(req) {
-                      alert(req);
+              $.get("http://47.92.52.135:9001/http_dissolve_room", { "roomId": $("#roomId").val(),"sign":hex_md5($("#roomId").val()+"~!@#$(*&^%$&"), }, function(req) {
+                     alert(req.vcResult);
               });
           });
         });
