@@ -19,6 +19,22 @@
             padding: 20px;
             text-align: center;
         }
+        #server{
+            outline: none;
+            line-height: 100%;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            padding-left: 60px;
+            border: 1px solid #feb7d1;
+            box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075), 0px 0px 10px #feb7d1;
+            border-radius: 5px;
+            height: 35px;
+            width: 200px;
+            color: pink;
+            font-size: 22px;
+            letter-spacing: 8px;
+        }
         #roomId{
             border: 1px solid #feb7d1;
             box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075), 0px 0px 10px #feb7d1;
@@ -45,12 +61,19 @@
     </style>
 </head>
 <body>
+    <div><select id="server"><option selected = "true" value = 0>测试服</option><option value = 1>正式服</option></select></div>
     <div><input id = "roomId" /></div>
     <div><button id="closeroom">关闭房间</button></div>
     <script type="text/javascript">
         $(document).ready(function(){
             $("#closeroom").click(function(){
-                window.location.href = "http://47.92.52.135:9001/http_dissolve_room?roomId=" + $("#roomId").val() + "&sign=" + hex_md5($("#roomId").val()+"~!@#$(*&^%$&");
+                var testHost = "47.92.154.205";
+                var realHost = "47.92.52.135";
+                var useHost = realHost;
+                if($('#server option:selected') .val() == 0){
+                    useHost = testHost;
+                }
+                window.location.href = "http://"+ useHost +":9001/http_dissolve_room?roomId=" + $("#roomId").val() + "&sign=" + hex_md5($("#roomId").val()+"~!@#$(*&^%$&");
                 // $.ajax({
                 //     type: "get",
                 //     url: "47.92.52.135:9001/http_dissolve_room",
