@@ -61,7 +61,7 @@
     </style>
 </head>
 <body>
-    <div><select id="server"><option selected = "true" value = 0>测试服</option><option value = 1>正式服</option></select></div>
+    <div><select id="server"><option selected = "true" value = 0>测试服</option><option value = 1>正式服</option><option value = 2>本地服</option></select></div>
     <div><input id = "roomId" /></div>
     <div><button id="closeroom">关闭房间</button></div>
     <script type="text/javascript">
@@ -69,10 +69,20 @@
             $("#closeroom").click(function(){
                 var testHost = "47.92.154.205";
                 var realHost = "47.92.52.135";
-                var useHost = realHost;
-                if($('#server option:selected') .val() == 0){
-                    useHost = testHost;
+                var localHost = "localhost";
+                var useHost;
+                switch($('#server option:selected') .val()){
+                    case 0:
+                        useHost = testHost;
+                        break;
+                    case 1:
+                        userHost = realHost;
+                        break;
+                    case 2:
+                        userHost = localHost;
+                        break;
                 }
+                alert(hex_md5($("#roomId").val()+"~!@#$(*&^%$&"))
                 window.location.href = "http://"+ useHost +":9001/http_dissolve_room?roomId=" + $("#roomId").val() + "&sign=" + hex_md5($("#roomId").val()+"~!@#$(*&^%$&");
                 // $.ajax({
                 //     type: "get",
