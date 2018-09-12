@@ -19,13 +19,13 @@
             padding: 20px;
             text-align: center;
         }
-        #server{
+        select{
             outline: none;
             line-height: 100%;
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            padding-left: 60px;
+            padding-left: 40px;
             border: 1px solid #feb7d1;
             box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075), 0px 0px 10px #feb7d1;
             border-radius: 5px;
@@ -33,9 +33,21 @@
             width: 200px;
             color: pink;
             font-size: 22px;
+        }
+        #msgInput{
             letter-spacing: 8px;
         }
-        #roomId{
+        #md5KeyResult{
+            margin-left: 0px;
+            width: 426px;
+        }
+        .notEdit{
+            box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075), 0px 0px 10px #aaaaaa;
+            border-color: #aaaaaa;
+            color: #aaaaaa;
+        }
+        input{
+            margin-left: 40px;
             border: 1px solid #feb7d1;
             box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075), 0px 0px 10px #feb7d1;
             border-radius: 5px;
@@ -44,9 +56,11 @@
             color: pink;
             font-size: 22px;
             padding-left: 20px;
-            letter-spacing: 8px;
         }
-        #closeroom{
+        button:first-child{
+            margin-right: 40px;
+        }
+        button{
             box-shadow: inset 1px 1px 1px rgba(0,0,0,0.075), 0px 0px 10px #feb7d1;
             cursor: pointer;
             text-align: center;
@@ -61,31 +75,101 @@
     </style>
 </head>
 <body>
-    <div><select id="server"><option selected = "true" value = "0">测试服</option><option value = "1">正式服</option><option value = "2">本地服</option></select></div>
-    <div><input id = "roomId" /></div>
-    <div><button id="closeroom">关闭房间</button></div>
+    <div>
+        <select id="typeSelect"><option>房间号</option><option>自定义内容</option></select>
+        <input id="msgInput" />
+    </div>
+    <div>
+        <select id="serverSelect">
+            <option selected = "true" value = "0">万州测试服</option>
+            <option value = "1">万州正式服</option>
+            <option value = "2">响水测试服</option>
+            <option value = "3">响水正式服</option>
+            <option value = "4">本地服</option>
+            <option value = "5">自定义服</option>
+        </select>
+        <input type = "text" id="serverInput"/>
+    </div>
+    <div>
+        <select id="md5KeySelect">
+            <option selected = "true" value = "0">房间口令</option>
+            <option value = "1">自定义口令</option>
+        </select>
+        <input type = "text" id="md5KeyInput"/>
+    </div>
+    <div>
+        <input type = "text" id="md5KeyResult"/>
+    </div>
+    <div>
+        <button id="closeroom">关闭房间</button>
+        <button id="creatyKey">生成口令</button>
+    </div>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#closeroom").click(function(){
-                var testHost = "47.92.154.205";
-                var realHost = "47.92.52.135";
-                var localHost = "localhost";
-                var useHost;
-                var selected = $('#server option:selected') .val();
-                switch(selected){
+            let wanzhouTestHost = '47.92.154.205';
+            let wanzhouRealHost = '47.92.52.135';
+            let xiangshuiTestHost = '';
+            let xiangshuiRealHost = '';
+            let localHost = 'localhost';
+            let roomMd5Key = '~!@#$(*&^%$&';
+            $('#serverInput').val(wanzhouTestHost);
+            $('#md5KeyInput').val(roomMd5Key);
+            $('#serverInput, #md5KeyInput, #md5KeyResult').attr('readonly','readonly');
+            $('#serverInput, #md5KeyInput, #md5KeyResult').addClass('notEdit');
+            $('#serverSelect').change(() => {
+                $('#serverInput').addClass('notEdit');
+                $('#serverInput').attr('readonly','readonly');
+                let serverSelect = $("#serverSelect").val();
+                switch(serverSelect){
                     case "0":
-                        useHost = testHost;
+                        $('#serverInput').val(wanzhouTestHost);
+                        return;
+                    case "1":
+                        $('#serverInput').val(wanzhouRealHost);
+                        return;
+                    case "2":
+                        $('#serverInput').val(xiangshuiTestHost);
+                        return;
+                    case "3":
+                        $('#serverInput').val(xiangshuiRealHost);
+                        return;
+                    case "4":
+                        $('#serverInput').val(localHost);
+                        return;
+                    case "5":
+                    $('#serverInput').val('');
+                        $('#serverInput').removeAttr('readonly');
+                        $('#serverInput').removeClass('notEdit');
+                        return;
+                }
+            });
+            $('#md5KeySelect').change(() => {
+                $('#md5KeyInput').addClass('notEdit');
+                $('#md5KeyInput').attr('readonly','readonly');
+                let md5KeySelect = $('#md5KeySelect').val();
+                switch(md5KeySelect){
+                    case "0":
+                        $('#md5KeyInput').val(roomMd5Key);
                         break;
                     case "1":
-                        useHost = realHost;
-                        break;
-                    case "2":
-                        useHost = localHost;
+                        $('#md5KeyInput').val('');
+                        $('#md5KeyInput').removeAttr('readonly');
+                        $('#md5KeyInput').removeClass('notEdit');
                         break;
                 }
-                console.log(typeof($('#server option:selected') .val())+ $('#server option:selected') .val())
-                console.log("sign: " + hex_md5($("#roomId").val()+"~!@#$(*&^%$&"))
-                window.location.href = "http://"+ useHost +":9001/http_dissolve_room?roomId=" + $("#roomId").val() + "&sign=" + hex_md5($("#roomId").val()+"~!@#$(*&^%$&");
+            });
+            $('#creatyKey').click(() => {
+                let msg = $('#msgInput').val();
+                let md5Key = $('#md5KeyInput').val();
+                $('#md5KeyResult').val(hex_md5(msg + md5Key));
+            });
+            $("#closeroom").click(() => {
+                let roomId = $('#msgInput').val();
+                let useHost = $('#serverInput').val();
+                let md5Key = $('#md5KeyInput').val();
+                let sign = hex_md5(roomId + md5Key);
+                let href = "http://"+ useHost +":9001/http_dissolve_room?roomId=" + roomId + "&sign=" + sign;
+                window.location.href = href;
                 // $.ajax({
                 //     type: "get",
                 //     url: "47.92.52.135:9001/http_dissolve_room",
